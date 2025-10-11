@@ -1,6 +1,7 @@
 package E_wallet.example.demo.configuration;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -10,6 +11,8 @@ import org.springframework.security.web.SecurityFilterChain;
 
 import static org.springframework.security.config.Customizer.withDefaults;
 
+
+@Configuration
 public class SecurityConfig {
 
     @Bean
@@ -17,7 +20,7 @@ public class SecurityConfig {
 
         http.authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(HttpMethod.POST, "/user").permitAll()
-                     //   .requestMatchers(HttpMethod.GET, "/user").hasAnyAuthority("USER", "SERVICE")
+                        .requestMatchers(HttpMethod.GET, "/user").hasAnyAuthority("USER", "SERVICE")
                         .anyRequest().permitAll())
                 .formLogin(withDefaults())
                 .httpBasic(withDefaults())
@@ -27,7 +30,7 @@ public class SecurityConfig {
 
 
          @Bean
-        public PasswordEncoder getEncoder(){
+        public PasswordEncoder passwordEncoder(){
     return new BCryptPasswordEncoder();
         }
 

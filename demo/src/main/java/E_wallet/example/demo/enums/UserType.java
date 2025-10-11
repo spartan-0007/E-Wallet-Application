@@ -4,5 +4,7 @@ public enum UserType {
 
     USER,
 
-    ADMIN
+    ADMIN,
+
+    SERVICE
 }
